@@ -1,0 +1,29 @@
+{
+  "name": "dbs",
+  "version": "1.0.0",
+  "description": "DBS Lab project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sparsh",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "config": "^3.0.1",
+    "connect-redis": "^3.4.0",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "joi": "^14.3.1",
+    "morgan": "^1.9.1",
+    "mysql": "^2.16.0",
+    "nodemailer": "^6.1.1",
+    "passport": "^0.4.0",
+    "promise-mysql": "^3.3.1",
+    "redis": "^2.8.0",
+    "save": "^2.3.3"
+  }
+}
