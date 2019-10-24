@@ -28,6 +28,65 @@ exports.logout = (req, res) => {
   req.session.destroy(err => {
     if (err) return res.sendError(err);
     req.logout();
-    return res.sendSuccess(null, { access: 0 });
+    return res.sendSuccess(null, "Logged Out");
   });
+};
+
+exports.forgotpassword = async (req, res) => {
+  let err, result;
+  [err, result] = await to(
+    db.query(`SELECT * FROM users WHERE email = ?`, [req.body.email])
+  );
+  if (result.length == 0) return res.sendError(null, "User does not exist");
+
+  var transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.MAILER,
+      pass: process.env.MAIL_PASS
+    }
+  });
+  var mailOptions = {
+    from: process.env.MAILER,
+    to: req.body.email,
+    subject: "AMS Password Reset",
+    // text: 'Follow the link to reset your password ',
+    html:
+      '<p>Click <a href="https://ams/resetpassword?token=' +
+      result[0].token +
+      '">here</a> to reset your password</p>'
+  };
+
+  transporter.sendMail(mailOptions, function(error, info) {
+    if (error) return res.sendError(error);
+    else return res.sendSuccess(info.response, "Email sent");
+  });
+};
+
+exports.resetpassword = async (req, res) => {
+  let pass = req.body.password;
+  let pass2 = req.body.password2;
+
+  if (pass.length < 8)
+    return res.sendError(null, "Password should be at least 8 characters long");
+  if (pass != pass2) return res.sendError(null, "Passwords do not match");
+  else {
+    let q = req.query.token;
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(pass, salt, async (err, pass) => {
+        if (err) res.sendError("Error in encryption");
+        else {
+          var newtoken = cryptoRandomString({ length: 16 });
+          [error, result] = await to(
+            db.query(
+              `UPDATE users SET password = ?, token = ? WHERE token = ?`,
+              [pass, newtoken, q]
+            )
+          );
+          if (error) return res.sendError(error);
+          else return res.sendSuccess(null, "Password reset successful");
+        }
+      });
+    });
+  }
 };
