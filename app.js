@@ -25,6 +25,10 @@ app.use(
   })
 );
 
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+app.use(express.static(path.join(__dirname, "public")));
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser("ams"));
@@ -32,7 +36,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(response);
 
-app.use("/api", routes);
+app.use("/", routes);
 
 const port = process.env.PORT || 3000;
 

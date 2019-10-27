@@ -16,6 +16,7 @@
     "cookie-parser": "^1.4.3",
     "crypto-random-string": "^3.0.1",
     "dotenv": "^6.2.0",
+    "ejs": "^2.7.1",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "joi": "^14.3.1",

@@ -1,7 +1,6 @@
 const db = require("../config/conn");
 const bcrypt = require("bcryptjs");
 const to = require("../utils/to");
-//const validator = require("../utils/validator");
 const nodemailer = require("nodemailer");
 const cryptoRandomString = require("crypto-random-string");
 
