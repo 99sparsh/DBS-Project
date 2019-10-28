@@ -7,20 +7,23 @@ const cryptoRandomString = require("crypto-random-string");
 exports.login = async (req, res) => {
   let err, user, result;
   [err, result] = await to(
-    db.query(`SELECT * FROM users WHERE email = ?`, [req.body.email])
+    db.query(`SELECT * FROM users WHERE username = ?`, [req.body.username])
   );
   if (err) return res.sendError(err);
   if (result.length == 0) return res.sendError(null, "User does not exist");
   user = result[0];
-  [err, result] = await to(bcrypt.compare(req.body.password, user.password));
-  if (err) return res.sendError(err);
-  if (!result) return res.sendError(null, "Invalid email/password combination");
-  delete user.password;
-  delete user.token;
-  req.logIn(user, err => {
-    if (err) return res.sendError(err);
-    return res.sendSuccess(user.access, "Login Successful!");
-  });
+  //[err, result] = await to(bcrypt.compare(req.body.password, user.password));
+  //if (err) return res.sendError(err);
+  if (req.body.password === user.password) {
+    //plain text password
+    delete user.password;
+    delete user.token;
+    req.logIn(user, err => {
+      if (err) return res.sendError(err);
+      return res.sendSuccess(user.access, "Login Successful!");
+    });
+  }
+  return res.sendError(null, "Invalid email/password combination");
 };
 
 exports.logout = (req, res) => {
@@ -34,7 +37,7 @@ exports.logout = (req, res) => {
 exports.forgotpassword = async (req, res) => {
   let err, result;
   [err, result] = await to(
-    db.query(`SELECT * FROM users WHERE email = ?`, [req.body.email])
+    db.query(`SELECT * FROM users WHERE username = ?`, [req.body.username])
   );
   if (result.length == 0) return res.sendError(null, "User does not exist");
 
@@ -63,29 +66,20 @@ exports.forgotpassword = async (req, res) => {
 };
 
 exports.resetpassword = async (req, res) => {
-  let pass = req.body.password;
-  let pass2 = req.body.password2;
-
-  if (pass.length < 8)
+  if (req.body.password.length < 8)
     return res.sendError(null, "Password should be at least 8 characters long");
-  if (pass != pass2) return res.sendError(null, "Passwords do not match");
+  if (req.body.password != req.body.password2)
+    return res.sendError(null, "Passwords do not match");
   else {
-    let q = req.query.token;
-    bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(pass, salt, async (err, pass) => {
-        if (err) res.sendError("Error in encryption");
-        else {
-          var newtoken = cryptoRandomString({ length: 16 });
-          [error, result] = await to(
-            db.query(
-              `UPDATE users SET password = ?, token = ? WHERE token = ?`,
-              [pass, newtoken, q]
-            )
-          );
-          if (error) return res.sendError(error);
-          else return res.sendSuccess(null, "Password reset successful");
-        }
-      });
-    });
+    var newtoken = cryptoRandomString({ length: 16 });
+    [error, result] = await to(
+      db.query(`UPDATE users SET password = ?, token = ? WHERE token = ?`, [
+        req.body.password,
+        newtoken,
+        req.query.token
+      ])
+    );
+    if (error) return res.sendError(error);
+    else return res.sendSuccess(null, "Password reset successful");
   }
 };
