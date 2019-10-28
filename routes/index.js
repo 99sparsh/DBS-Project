@@ -57,6 +57,15 @@ router.post(
   validator(airlineAdminSchema.addBooking),
   airlineAdmin.addBooking
 );
+
+router.post(
+  "/admin/cancelbooking",
+  authenticate,
+  access(1),
+  validator(airlineAdminSchema.cancelBooking),
+  airlineAdmin.cancelBooking
+);
+
 //airport admin routes
 router.post(
   "/apadmin/addairline",
