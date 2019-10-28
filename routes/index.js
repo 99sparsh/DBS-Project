@@ -5,8 +5,11 @@ const validator = require("../utils/validator");
 
 const auth = require("./auth");
 const apadmin = require("./airportadmin");
+const airlineAdmin = require("./airlineadmin");
 const authSchema = require("../schemas/auth");
 const apadminSchema = require("../schemas/airportadmin");
+const airlineAdminSchema = require("../schemas/airlineadmin");
+
 
 const redirectIfLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) return res.redirect("/home");
@@ -47,6 +50,14 @@ router.post(
   auth.resetpassword
 );
 
+//airline admin routes
+router.post(
+  "/admin/addbooking",
+  authenticate,
+  access(1),
+  validator(airlineAdminSchema.addBooking),
+  airlineAdmin.addBooking
+);
 //airport admin routes
 router.post(
   "/apadmin/addairline",
