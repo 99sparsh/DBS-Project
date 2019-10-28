@@ -2,9 +2,9 @@ const Joi = require("joi");
 
 exports.addAirline = Joi.object({
   body: Joi.object({
-    flight_id: Joi.number().required(),
+    airline_id: Joi.number().required(),
     name: Joi.string().required(),
-    age: Joi.number().required(),
-    phone: Joi.number().required()
+    fleet_size: Joi.number().required(),
+    no_staff: Joi.number().required()
   }).required()
 });
