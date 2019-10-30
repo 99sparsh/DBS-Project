@@ -37,3 +37,9 @@ exports.cancelBooking = async (req, res) => {
   if (err) return res.sendError(err);
   return res.sendSuccess(result[0].Message);
 };
+
+exports.showScheduleToBook = async (req, res) => {
+  [err, result] = await to(db.query(`select * from schedule_view`));
+  if (err) return res.sendError(err);
+  return res.sendSuccess(result, "Sent all flights");
+};

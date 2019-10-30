@@ -66,6 +66,12 @@ router.post(
   airlineAdmin.cancelBooking
 );
 
+router.get(
+  "/admin/showschedule",
+  authenticate,
+  access(1),
+  airlineAdmin.showScheduleToBook
+);
 //airport admin routes
 router.post(
   "/apadmin/addairline",
