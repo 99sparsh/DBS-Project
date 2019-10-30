@@ -39,7 +39,54 @@ exports.cancelBooking = async (req, res) => {
 };
 
 exports.showScheduleToBook = async (req, res) => {
-  [err, result] = await to(db.query(`select * from schedule_view`));
+  [err, result] = await to(
+    db.query(`select * from schedule_view where airline_id=?`, [
+      req.user.airline_id
+    ])
+  );
   if (err) return res.sendError(err);
   return res.sendSuccess(result, "Sent all flights");
+};
+
+exports.addCabincrew = async (req, res) => {
+  [err, result] = await to(
+    db.query(`insert into cabincrew values(?,?,?,?,?)`, [
+      req.body.crew_id,
+      req.body.airline_id,
+      req.body.name,
+      req.body.age,
+      req.body.salary
+    ])
+  );
+  if (err) return res.sendError(err);
+  return res.sendSuccess("Cabincrew added");
+};
+
+exports.addPilot = async (req, res) => {
+  [err, result] = await to(
+    db.query(`insert into pilot values(?,?,?,?,?)`, [
+      req.body.pilot_id,
+      req.body.airline_id,
+      req.body.name,
+      req.body.age,
+      req.body.salary
+    ])
+  );
+  if (err) return res.sendError(err);
+  return res.sendSuccess("Pilot added");
+};
+
+exports.addGroundstaff = async (req, res) => {
+  [err, result] = await to(
+    db.query(`insert into groundStaff values(?,?,?,?,?,?)`, [
+      req.body.staff_id,
+      req.body.airline_id,
+      req.body.name,
+      req.body.work,
+      req.body.age,
+      req.body.salary
+    ])
+  );
+  if (err) return res.sendError(err);
+  return res.sendSuccess("Groundstaff added");
 };

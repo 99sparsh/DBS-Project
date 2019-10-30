@@ -22,8 +22,7 @@ exports.login = async (req, res) => {
       if (err) return res.sendError(err);
       return res.sendSuccess(user.access, "Login Successful!");
     });
-  }
-  return res.sendError(null, "Invalid email/password combination");
+  } else return res.sendError(null, "Invalid email/password combination");
 };
 
 exports.logout = (req, res) => {

@@ -28,6 +28,11 @@ router.get("/home", async (req, res) => {
   res.send("WORKING");
 });
 
+const checkAirline = (req, res, next) => {
+  if (req.user.airline_id == req.body.airline_id) return next();
+  return res.sendError(null, "You can only modify own airline");
+};
+
 //auth routes
 router.post(
   "/login",
@@ -72,6 +77,31 @@ router.get(
   access(1),
   airlineAdmin.showScheduleToBook
 );
+
+router.post(
+  "/admin/addcabincrew",
+  authenticate,
+  access(1),
+  checkAirline,
+  airlineAdmin.addCabincrew
+);
+
+router.post(
+  "/admin/addpilot",
+  authenticate,
+  access(1),
+  checkAirline,
+  airlineAdmin.addPilot
+);
+
+router.post(
+  "/admin/addgroundstaff",
+  authenticate,
+  access(1),
+  checkAirline,
+  airlineAdmin.addGroundstaff
+);
+
 //airport admin routes
 router.post(
   "/apadmin/addairline",
