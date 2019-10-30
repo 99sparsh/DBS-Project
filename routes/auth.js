@@ -40,6 +40,15 @@ exports.forgotpassword = async (req, res) => {
   );
   if (result.length == 0) return res.sendError(null, "User does not exist");
 
+  var newtoken = cryptoRandomString({ length: 16 });
+  [error, result] = await to(
+    db.query(`UPDATE users SET token = ? WHERE username = ?`, [
+      newtoken,
+      req.body.username
+    ])
+  );
+  if (err) return res.sendError(err);
+
   var transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -54,7 +63,7 @@ exports.forgotpassword = async (req, res) => {
     // text: 'Follow the link to reset your password ',
     html:
       '<p>Click <a href="https://ams/resetpassword?token=' +
-      result[0].token +
+      newtoken +
       '">here</a> to reset your password</p>'
   };
 
@@ -70,11 +79,10 @@ exports.resetpassword = async (req, res) => {
   if (req.body.password != req.body.password2)
     return res.sendError(null, "Passwords do not match");
   else {
-    var newtoken = cryptoRandomString({ length: 16 });
     [error, result] = await to(
       db.query(`UPDATE users SET password = ?, token = ? WHERE token = ?`, [
         req.body.password,
-        newtoken,
+        null,
         req.query.token
       ])
     );
