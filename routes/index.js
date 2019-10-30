@@ -111,4 +111,11 @@ router.post(
   apadmin.addAirline
 );
 
+router.post(
+  "/apadmin/addsecurity",
+  authenticate,
+  access(2),
+  apadmin.addSecurity
+);
+
 module.exports = router;

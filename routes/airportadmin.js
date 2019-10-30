@@ -3,7 +3,7 @@ const to = require("../utils/to");
 
 exports.addAirline = async (req, res) => {
   [err, result] = await to(
-    db.query("insert into airlines values(?,?,?,?)", [
+    db.query(`insert into airlines values(?,?,?,?)`, [
       req.body.airline_id,
       req.body.name,
       req.body.fleet_size,
@@ -12,4 +12,15 @@ exports.addAirline = async (req, res) => {
   );
   if (err) return res.sendError(err);
   return res.sendSuccess("Inserted Airline");
+};
+
+exports.addSecurity = async (req, res) => {
+  [err, result] = await to(
+    db.query(`insert into security values(?,?,?,?)`, [
+      req.body.security_id,
+      req.body.name,
+      req.body.age,
+      req.body.post
+    ])
+  );
 };
