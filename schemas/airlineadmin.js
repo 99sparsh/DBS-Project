@@ -11,6 +11,6 @@ exports.addBooking = Joi.object({
 
 exports.cancelBooking = Joi.object({
   body: Joi.object({
-    booking_id: Joi.number.required()
+    booking_id: Joi.number().required()
   }).required()
 });
