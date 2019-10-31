@@ -3,6 +3,7 @@ const db = require("../config/conn");
 const to = require("../utils/to");
 const validator = require("../utils/validator");
 
+const frontend = require("./frontend");
 const auth = require("./auth");
 const apadmin = require("./airportadmin");
 const airlineAdmin = require("./airlineadmin");
@@ -11,24 +12,21 @@ const apadminSchema = require("../schemas/airportadmin");
 const airlineAdminSchema = require("../schemas/airlineadmin");
 
 const redirectIfLoggedIn = (req, res, next) => {
-  if (req.isAuthenticated()) return res.redirect("/home");
+  if (req.isAuthenticated()) {
+    if (req.user.access == 1) return res.redirect("/airlinehome");
+  }
   return next();
 };
 const authenticate = (req, res, next) => {
   if (req.isAuthenticated()) return next();
-  else return res.sendError(null, "Login First!");
+  else return res.redirect("/");
 };
 const access = level => (req, res, next) => {
   if (req.user && req.user.access >= level) return next();
   return res.sendError(null, "Unauthorized access");
 };
 
-router.get("/", async (req, res) => {
-  res.render("index");
-});
-router.get("/", async (req, res) => {
-  res.send("Home placeholder");
-});
+router.get("/", redirectIfLoggedIn, frontend.index);
 
 const checkAirline = (req, res, next) => {
   if (req.user.airline_id == req.body.airline_id) return next();
@@ -104,6 +102,7 @@ router.post(
   airlineAdmin.addGroundstaff
 );
 
+router.get("/airlinehome", authenticate, access(1), frontend.airlineHome);
 //airport admin routes
 router.post(
   "/apadmin/addairline",

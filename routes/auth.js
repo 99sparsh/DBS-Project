@@ -20,7 +20,7 @@ exports.login = async (req, res) => {
     delete user.token;
     req.logIn(user, err => {
       if (err) return res.sendError(err);
-      return res.sendSuccess(user.access, "Login Successful!");
+      if (user.access == 1) return res.redirect("/airlinehome");
     });
   } else return res.sendError(null, "Invalid email/password combination");
 };
