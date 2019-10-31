@@ -23,9 +23,11 @@ const access = level => (req, res, next) => {
   return res.sendError(null, "Unauthorized access");
 };
 
-router.get("/home", async (req, res) => {
-  //test route
-  res.send("WORKING");
+router.get("/", async (req, res) => {
+  res.render("index");
+});
+router.get("/", async (req, res) => {
+  res.send("Home placeholder");
 });
 
 const checkAirline = (req, res, next) => {
