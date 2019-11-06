@@ -52,14 +52,14 @@ exports.addCabincrew = async (req, res) => {
   [err, result] = await to(
     db.query(`insert into cabincrew values(?,?,?,?,?)`, [
       req.body.crew_id,
-      req.body.airline_id,
+      req.user.airline_id,
       req.body.name,
       req.body.age,
       req.body.salary
     ])
   );
   if (err) return res.sendError(err);
-  return res.sendSuccess("Cabincrew added");
+  else return res.sendSuccess("Success");
 };
 
 exports.addPilot = async (req, res) => {

@@ -23,14 +23,14 @@ const authenticate = (req, res, next) => {
 };
 const access = level => (req, res, next) => {
   if (req.user && req.user.access >= level) return next();
-  return res.sendError(null, "Unauthorized access");
+  else return res.sendError(null, "Unauthorized access");
 };
 
 router.get("/", redirectIfLoggedIn, frontend.index);
 
 const checkAirline = (req, res, next) => {
   if (req.user.airline_id == req.body.airline_id) return next();
-  return res.sendError(null, "You can only modify own airline");
+  else return res.sendError(null, "You can only modify own airline");
 };
 
 //auth routes
@@ -102,7 +102,6 @@ router.post(
   airlineAdmin.addGroundstaff
 );
 
-router.get("/airlinehome", authenticate, access(1), frontend.airlineHome);
 //airport admin routes
 router.post(
   "/apadmin/addairline",
@@ -119,4 +118,8 @@ router.post(
   apadmin.addSecurity
 );
 
+//frontend routes
+router.get("/airlinehome", authenticate, access(1), frontend.airlineHome);
+router.get("/makebooking", authenticate, access(1), frontend.addbooking);
+router.get("/addcabincrew", authenticate, access(1), frontend.addcabincrew);
 module.exports = router;

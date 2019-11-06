@@ -5,6 +5,7 @@ const nodemailer = require("nodemailer");
 const cryptoRandomString = require("crypto-random-string");
 
 exports.login = async (req, res) => {
+  console.log(req.ip);
   let err, user, result;
   [err, result] = await to(
     db.query(`SELECT * FROM users WHERE username = ?`, [req.body.username])
