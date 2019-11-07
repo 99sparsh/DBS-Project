@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GroundStaff</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/Login-Form-Dark.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+
+  <body>
+    <div class="login-dark">
+      <form
+        method="post"
+        style="margin:0px;padding:38px;height:498px;width:685px;"
+        action="/apadmin/addsecurity"
+      >
+        <h1 class="text-center text-primary" style="padding:-80px;">
+          Security
+        </h1>
+        <input
+          class="form-control form-control-lg"
+          type="text"
+          placeholder="Security ID"
+          name="security_id"
+        /><input
+          class="form-control form-control-lg"
+          type="text"
+          placeholder="Name"
+          name="name"
+        />
+        <input
+          class="form-control form-control-lg"
+          type="text"
+          placeholder="Age"
+          name="age"
+        /><input
+          class="form-control form-control-lg"
+          type="text"
+          placeholder="Post"
+          name="post"
+        />
+        <div class="form-group">
+          <button class="btn btn-primary btn-block btn-lg" type="submit">
+            Add
+          </button>
+        </div>
+      </form>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
