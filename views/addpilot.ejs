@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pilot</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/Login-Form-Dark.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+
+  <body>
+    <div class="login-dark">
+      <form
+        method="post"
+        style="margin:0px;padding:48px;height:463px;"
+        action="/admin/addpilot"
+      >
+        <h1 class="text-center text-primary">Pilot</h1>
+        <input
+          class="form-control form-control-lg"
+          type="text"
+          placeholder="Pilot ID"
+          name="pilot_id"
+        /><input
+          class="form-control form-control-lg"
+          type="text"
+          placeholder="Airline ID"
+          name="airline_id"
+        /><input
+          class="form-control form-control-lg"
+          type="text"
+          placeholder="Name"
+          name="name"
+        />
+        <input
+          class="form-control form-control-lg"
+          type="text"
+          placeholder="Age"
+          name="age"
+        /><input
+          class="form-control form-control-lg"
+          type="text"
+          placeholder="Salary"
+          name="salary"
+        />
+        <div class="form-group">
+          <button class="btn btn-primary btn-block btn-lg" type="submit">
+            Add
+          </button>
+        </div>
+      </form>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
