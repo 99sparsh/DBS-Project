@@ -130,4 +130,6 @@ router.get("/airporthome", authenticate, access(2), frontend.airporthome);
 router.get("/cancelbooking", authenticate, access(1), frontend.cancelbooking);
 router.get("/scheduleflight", authenticate, access(1), frontend.addschedule);
 router.get("/showdetails", authenticate, access(1), frontend.showdetails);
+router.get("/forgotpassword",frontend.forgotpassword);
+router.get("/resetpassword",frontend.resetpassword);
 module.exports = router;

@@ -10,8 +10,7 @@ exports.login = Joi.object({
 
 exports.forgotPassword = Joi.object({
   body: Joi.object({
-    email: Joi.string()
-      .email()
+    username: Joi.string()
       .required()
   }).required()
 });

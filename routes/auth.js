@@ -43,7 +43,7 @@ exports.forgotpassword = async (req, res) => {
   if (result.length == 0) return res.sendError(null, "User does not exist");
 
   var newtoken = cryptoRandomString({ length: 16 });
-  [error, result] = await to(
+  [error, res] = await to(
     db.query(`UPDATE users SET token = ? WHERE username = ?`, [
       newtoken,
       req.body.username
@@ -60,7 +60,7 @@ exports.forgotpassword = async (req, res) => {
   });
   var mailOptions = {
     from: process.env.MAILER,
-    to: req.body.email,
+    to: result[0].email,
     subject: "AMS Password Reset",
     // text: 'Follow the link to reset your password ',
     html:
@@ -68,9 +68,10 @@ exports.forgotpassword = async (req, res) => {
       newtoken +
       '">here</a> to reset your password</p>'
   };
+  console.log(mailOptions);
 
   transporter.sendMail(mailOptions, function(error, info) {
-    if (error) return res.sendError(error);
+    if (error) console.log(error);
     else return res.sendSuccess(info.response, "Email sent");
   });
 };
