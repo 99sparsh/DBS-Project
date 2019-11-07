@@ -22,6 +22,7 @@ exports.login = async (req, res) => {
     req.logIn(user, err => {
       if (err) return res.sendError(err);
       if (user.access == 1) return res.redirect("/airlinehome");
+      if(user.access == 2) return res.redirect("/airporthome");
     });
   } else return res.sendError(null, "Invalid email/password combination");
 };
