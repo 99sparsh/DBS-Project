@@ -90,3 +90,38 @@ exports.addGroundstaff = async (req, res) => {
   if (err) return res.sendError(err);
   return res.sendSuccess("Groundstaff added");
 };
+
+exports.addSchedule = async (req, res) => {
+  [err, airplanes] = await to(
+    db.query(
+      `select airplane_id from airplanes where airplane_id not in (select airplane_id from schedule where date(departure)=?) and airline_id=?`,
+      [req.body.date, req.user.airline_id]
+    )
+  );
+  if (err) return res.sendError(err);
+  [err, pilots] = await to(
+    db.query(
+      `select pilot_id from pilot where pilot_id not in (select pilot_id from schedule where date(departure)=?) and airline_id=?`,
+      [req.body.date, req.user.airline_id]
+    )
+  );
+  if (err) return res.sendError(err);
+  [err, fare] = await to(
+    db.query(`select fare from fare where airline_id=? and destination=?`, [
+      req.user.airline_id,
+      req.body.destination
+    ])
+  );
+  if (err) return res.sendError(err);
+  [err, buses] = await to(
+    db.query(
+      `select bus_id from buses where bus_id not in (select bus_id from schedule where ? > date_add(departure,INTERVAL 2 HOUR) and ? < date_add(departure,INTERVAL -2 HOUR) and airline_id=?`,
+      [req.body.date, req.body.date, req.user.airline_id]
+    )
+  );
+  return res.render("schedule", {
+    airplanes: airplanes,
+    pilots: pilots,
+    buses: buses
+  });
+};

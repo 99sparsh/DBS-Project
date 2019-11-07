@@ -1,24 +1,33 @@
-exports.airlineHome = async (req, res) => {
-    res.render("airlinehome");
+exports.airlinehome = async (req, res) => {
+  res.render("airlinehome");
 };
 exports.index = async (req, res) => {
-    res.render("index");
+  res.render("index");
 };
 exports.addbooking = async (req, res) => {
-    res.render("addbooking");
+  res.render("addbooking");
 };
 exports.addcabincrew = async (req, res) => {
-    res.render("addcabincrew");
+  res.render("addcabincrew");
 };
-exports.addgroundstaff = async(req,res) => {
-    res.render("addgroundstaff");
-}
-exports.addpilot = async(req,res) => {
-    res.render("addpilot");
-}
-exports.addairline = async(req,res)=> {
-    res.render("addairline");
-}
-exports.addsecurity = async(req,res)=> {
-    res.render("addsecurity");
-}
+exports.addgroundstaff = async (req, res) => {
+  res.render("addgroundstaff");
+};
+exports.addpilot = async (req, res) => {
+  res.render("addpilot");
+};
+exports.addairline = async (req, res) => {
+  res.render("addairline");
+};
+exports.addsecurity = async (req, res) => {
+  res.render("addsecurity");
+};
+exports.airporthome = async (req, res) => {
+  res.render("airporthome");
+};
+exports.cancelbooking = async (req, res) => {
+  res.render("cancelbooking");
+};
+exports.addschedule = async (req, res) => {
+  res.render("scheduleflight");
+};

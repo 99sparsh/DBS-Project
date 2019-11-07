@@ -119,11 +119,13 @@ router.post(
 );
 
 //frontend routes
-router.get("/airlinehome", authenticate, access(1), frontend.airlineHome);
+router.get("/airlinehome", authenticate, access(1), frontend.airlinehome);
 router.get("/makebooking", authenticate, access(1), frontend.addbooking);
 router.get("/addcabincrew", authenticate, access(1), frontend.addcabincrew);
 router.get("/addgroundstaff",authenticate,access(1),frontend.addgroundstaff);
 router.get("/addpilot",authenticate,access(1),frontend.addpilot);
-router.get("/addairline",authenticate,access(2),frontend.addairline)
+router.get("/addairline",authenticate,access(2),frontend.addairline);
 router.get("/addsecurity",authenticate,access(2),frontend.addsecurity);
+router.get("/airporthome",authenticate,access(2),frontend.airporthome);
+router.get("/cancelbooking",authenticate,access(1),frontend.cancelbooking);
 module.exports = router;
