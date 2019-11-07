@@ -10,3 +10,9 @@ exports.addbooking = async (req, res) => {
 exports.addcabincrew = async (req, res) => {
     res.render("addcabincrew");
 };
+exports.addgroundstaff = async(req,res) => {
+    res.render("addgroundstaff");
+}
+exports.addPilot = async(req,res) => {
+    res.render("addpilot");
+}
