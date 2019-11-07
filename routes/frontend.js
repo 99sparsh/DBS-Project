@@ -13,6 +13,12 @@ exports.addcabincrew = async (req, res) => {
 exports.addgroundstaff = async(req,res) => {
     res.render("addgroundstaff");
 }
-exports.addPilot = async(req,res) => {
+exports.addpilot = async(req,res) => {
     res.render("addpilot");
+}
+exports.addairline = async(req,res)=> {
+    res.render("addairline");
+}
+exports.addsecurity = async(req,res)=> {
+    res.render("addsecurity");
 }

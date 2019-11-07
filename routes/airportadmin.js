@@ -6,8 +6,8 @@ exports.addAirline = async (req, res) => {
     db.query(`insert into airlines values(?,?,?,?)`, [
       req.body.airline_id,
       req.body.name,
-      req.body.fleet_size,
-      req.body.no_staff
+      0,
+      0
     ])
   );
   if (err) return res.sendError(err);
