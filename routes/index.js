@@ -117,7 +117,7 @@ router.post(
   access(2),
   apadmin.addSecurity
 );
-
+router.post("/admin/addschedule",authenticate,access(1),airlineAdmin.addSchedule);
 //frontend routes
 router.get("/airlinehome", authenticate, access(1), frontend.airlinehome);
 router.get("/makebooking", authenticate, access(1), frontend.addbooking);
@@ -128,5 +128,6 @@ router.get("/addairline", authenticate, access(2), frontend.addairline);
 router.get("/addsecurity", authenticate, access(2), frontend.addsecurity);
 router.get("/airporthome", authenticate, access(2), frontend.airporthome);
 router.get("/cancelbooking", authenticate, access(1), frontend.cancelbooking);
-router.get("/addschedule", authenticate, access(1), frontend.addschedule);
+router.get("/scheduleflight", authenticate, access(1), frontend.addschedule);
+router.get("/showdetails", authenticate, access(1), frontend.showdetails);
 module.exports = router;

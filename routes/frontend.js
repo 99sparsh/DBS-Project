@@ -31,3 +31,6 @@ exports.cancelbooking = async (req, res) => {
 exports.addschedule = async (req, res) => {
   res.render("scheduleflight");
 };
+exports.showdetails = async (req, res) => {
+  res.render("showdetails");
+};
