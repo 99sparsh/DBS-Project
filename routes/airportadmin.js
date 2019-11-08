@@ -35,9 +35,8 @@ exports.showSchedule = async (req, res) => {
   if (err) return res.sendError(err);
   [err, today] = await to(db.query(`select scheduledFlights() from schedule`));
   if (err) return res.sendError(err);
-  var data = {
+  return res.render("adminschedule", {
     schedule: schedule,
     today: today
-  };
-  return res.render("adminschedule", data);
+  });
 };
