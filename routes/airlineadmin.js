@@ -1,3 +1,6 @@
+/*eslint quote-props: ["error", "always"]*/
+/*eslint-env es6*/
+
 const db = require("../config/conn");
 const to = require("../utils/to");
 
@@ -126,17 +129,86 @@ exports.addSchedule = async (req, res) => {
       [req.body.date, req.body.date, req.user.airline_id]
     )
   );
-  if(err) return res.sendError(err);
+  if (err) return res.sendError(err);
   console.log({
-    "airplanes": airplanes,
-    "pilots": pilots,
-    "buses": buses,
-    "gates": gates
+    airplanes: airplanes,
+    pilots: pilots,
+    buses: buses,
+    gates: gates
   });
   return res.render("schedule", {
-    "airplanes": airplanes,
-    "pilots": pilots,
-    "buses": buses,
-    "gates": gates
+    airplanes: airplanes,
+    pilots: pilots,
+    buses: buses,
+    gates: gates
   });
+};
+
+exports.scheduleHangar = async (req, res) => {
+  [err, result] = await to(
+    db.query(`call schedule_hangar(?,?,?)`, [
+      req.body.hid,
+      req.body.aid,
+      req.body.date
+    ])
+  );
+  if (err) return res.sendError(err);
+  else return res.sendSuccess("Inserted");
+};
+
+exports.showDetails = async (req, res) => {
+  [err, pilots] = await to(
+    db.query(
+      `select pilot_id,pilot.name,age,salary,airlines.name from pilot,airlines where pilot.airline_id=airline.airline_id`
+    )
+  );
+  if (err) return res.sendError(err);
+  [err, crew] = await to(
+    db.query(
+      `select crew_id,cabincrew.name,age,salary,airlines.name from cabincrew,airlines where cabincrew.airline_id=airlines.airline_id`
+    )
+  );
+  if (err) return res.sendError(err);
+  [err, staff] = await to(
+    db.query(
+      `select staff_id,groundStaff.name,work,age,salary,airlines.name from groundStaff,airlines where groundStaff.airline_id=airlines.airline_id`
+    )
+  );
+
+  if (err) return res.sendError(err);
+  var airportView = {
+    pilots: pilots,
+    crew: crew,
+    staff: staff
+  };
+  console.log(airportView);
+  [err, pilots] = await to(
+    db.query(
+      `select name,age from pilot_view,airlines where pilot_view.airline=(select name from airlines where airline_id=?)`,
+      [req.user.airline_id]
+    )
+  );
+  if (err) return res.sendError(err);
+  [err, crew] = await to(
+    db.query(
+      `select name,age from crew_view,airlines where crew_view.airline=(select name from airlines where airline_id=?)`,
+      [req.user.airline_id]
+    )
+  );
+  if (err) return res.sendError(err);
+  [err, staff] = await to(
+    db.query(
+      `select name,age,work from staff_view,airlines where staff_view.airline=(select name from airlines where airline_id=?)`,
+      [req.user.airline_id]
+    )
+  );
+  if (err) return res.sendError(err);
+  var airlineView = {
+    pilots: pilots,
+    crew: crew,
+    staff: staff
+  };
+  console.log(airlineView);
+  if (req.user.access == 1) return res.render("showdetails", airlineView);
+  else return res.render("showdetails", airportView);
 };
