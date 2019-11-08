@@ -1,6 +1,6 @@
 # DBS-Project
 ## Airport Management System for DBS Lab
-###How to run:
+### How to run:
 1. Have nodejs,npm,redis and mysql installed
 2. clone the repository
 3. run npm install within the cloned directory
