@@ -180,21 +180,21 @@ exports.showDetails = async (req, res) => {
   };
   [err, pilots] = await to(
     db.query(
-      `select pilot_view.name,age from pilot_view,airlines where pilot_view.airline=(select name from airlines where airline_id=?)`,
+      `select pilot_view.name,age from pilot_view where pilot_view.airline=(select name from airlines where airline_id=?)`,
       [req.user.airline_id]
     )
   );
   if (err) return res.sendError(err);
   [err, crew] = await to(
     db.query(
-      `select crew_view.name,age from crew_view,airlines where crew_view.airline=(select name from airlines where airline_id=?)`,
+      `select crew_view.name,age from crew_view where crew_view.airline=(select name from airlines where airline_id=?)`,
       [req.user.airline_id]
     )
   );
   if (err) return res.sendError(err);
   [err, staff] = await to(
     db.query(
-      `select staff_view.name,age,work from staff_view,airlines where staff_view.airline=(select name from airlines where airline_id=?)`,
+      `select staff_view.name,age,work from staff_view where staff_view.airline=(select name from airlines where airline_id=?)`,
       [req.user.airline_id]
     )
   );
