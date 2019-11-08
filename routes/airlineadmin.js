@@ -156,19 +156,19 @@ exports.scheduleHangar = async (req, res) => {
 exports.showDetails = async (req, res) => {
   [err, pilots] = await to(
     db.query(
-      `select pilot_id,pilot.name,age,salary,airlines.name from pilot,airlines where pilot.airline_id=airlines.airline_id`
+      `select pilot_id,pilot.name,age,salary,airlines.name as airline from pilot,airlines where pilot.airline_id=airlines.airline_id`
     )
   );
   if (err) return res.sendError(err);
   [err, crew] = await to(
     db.query(
-      `select crew_id,cabincrew.name,age,salary,airlines.name from cabincrew,airlines where cabincrew.airline_id=airlines.airline_id`
+      `select crew_id,cabincrew.name,age,salary,airlines.name as airline from cabincrew,airlines where cabincrew.airline_id=airlines.airline_id`
     )
   );
   if (err) return res.sendError(err);
   [err, staff] = await to(
     db.query(
-      `select staff_id,groundStaff.name,work,age,salary,airlines.name from groundStaff,airlines where groundStaff.airline_id=airlines.airline_id`
+      `select staff_id,groundStaff.name,work,age,salary,airlines.name as airline from groundStaff,airlines where groundStaff.airline_id=airlines.airline_id`
     )
   );
 

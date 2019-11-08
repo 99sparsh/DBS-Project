@@ -73,11 +73,87 @@
                 <tr>
                   <td style="color:#ffffff"><%=JSON.stringify(view.staff[i].name)%></td>
                   <td style="color:#ffffff"><%=JSON.stringify(view.staff[i].age)%></td>
+                  <td style="color:#ffffff"><%=JSON.stringify(view.staff[i].work)%></td>
                 </tr>
                 <% } %>
               </tbody>
             </table>
             <% } %>
+            <% if(access == 2){ %>
+              <caption><h3 style="color:#ffa500">Pilots</h3></caption>
+              <table class="table" border="5" width="40" cellspacing=10 >
+                <thead>
+                  <tr>
+                    <th style="color:#ffa500">Id</th>
+                    <th style="color:#ffa500">Name</th>
+                    <th style="color:#ffa500">Age</th>
+                    <th style="color:#ffa500">Salary</th>
+                    <th style="color:#ffa500">Airline</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%for(var i=0;i < view.pilots.length; i++){%>
+                  <tr>
+                    <td style="color:#ffa500"><%=JSON.stringify(view.pilots[i].pilot_id)%></td>
+                    <td style="color:#ffa500"><%=JSON.stringify(view.pilots[i].name)%></td>
+                    <td style="color:#ffa500"><%=JSON.stringify(view.pilots[i].age)%></td>
+                    <td style="color:#ffa500"><%=JSON.stringify(view.pilots[i].salary)%></td>
+                    <td style="color:#ffa500"><%=JSON.stringify(view.pilots[i].airline)%></td>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+              <br>
+              <caption><h3 style="color:#ffa500">Crew</h3></caption>
+              <table class="table" border="5" width="40" cellspacing=10 >
+                <thead>
+                  <tr>
+                    <th style="color:#ffa500">Id</th>
+                    <th style="color:#ffa500">Name</th>
+                    <th style="color:#ffa500">Age</th>
+                    <th style="color:#ffa500">Salary</th>
+                    <th style="color:#ffa500">Airline</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%for(var i=0;i < view.crew.length; i++){%>
+                  <tr>
+                    <td style="color:#ffa500"><%=JSON.stringify(view.crew[i].crew_id)%></td>
+                    <td style="color:#ffa500"><%=JSON.stringify(view.crew[i].name)%></td>
+                    <td style="color:#ffa500"><%=JSON.stringify(view.crew[i].age)%></td>
+                    <td style="color:#ffa500"><%=JSON.stringify(view.crew[i].salary)%></td>
+                    <td style="color:#ffa500"><%=JSON.stringify(view.crew[i].airline)%></td>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+              <br>
+              <caption><h3 style="color:#ffa500">Ground Staff</h3></caption>
+              <table class="table" border="5" width="40" cellspacing=10 >
+                <thead>
+                  <tr>
+                    <th style="color:#ffa500">Id</th>
+                    <th style="color:#ffa500">Name</th>
+                    <th style="color:#ffa500">Work</th>
+                    <th style="color:#ffa500">Age</th>
+                    <th style="color:#ffa500">Salary</th>
+                    <th style="color:#ffa500">Airline</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%for(var i=0;i < view.staff.length; i++){%>
+                  <tr>
+                    <td style="color:#ffa500"><%=JSON.stringify(view.staff[i].staff_id)%></td>
+                    <td style="color:#ffa500"><%=JSON.stringify(view.staff[i].name)%></td>
+                    <td style="color:#ffa500"><%=JSON.stringify(view.staff[i].work)%></td>
+                    <td style="color:#ffa500"><%=JSON.stringify(view.staff[i].age)%></td>
+                    <td style="color:#ffa500"><%=JSON.stringify(view.staff[i].salary)%></td>
+                    <td style="color:#ffa500"><%=JSON.stringify(view.staff[i].airline)%></td>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+              <% } %>
         </div>
       </form>
     </div>
