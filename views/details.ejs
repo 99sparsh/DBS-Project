@@ -23,25 +23,24 @@
     <div class="login-dark">
         <div class="table-responsive" style="margin:26px 0px;">
           <% if(access == 1){ %>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>name</th>
-                <th>age</th>
-                <th>airline</th>
-              </tr>
-            </thead>
-            <tbody>
-              <%for(var i=0;i < view.pilots.length; i++){%>
-              <tr>
-                <td><%= view.pilots.name%></td>
-                <td><%= view.pilots.age%></td>
-                <td><%= view.pilots.airline%></td>
-              </tr>
-              <% } %>
-            </tbody>
-          </table>
-          <% } %>
+            <% if(access == 1){ %>
+            <table class="table" border="5" width=150>
+              <thead>
+                <tr>
+                  <th style="color:#ffffff">Name</th>
+                  <th style="color:#ffffff">Age</th>
+                </tr>
+              </thead>
+              <tbody>
+                <%for(var i=0;i < view.pilots.length; i++){%>
+                <tr>
+                  <td style="color:#ffffff"><%=JSON.stringify(view.pilots[i].name)%></td>
+                  <td style="color:#ffffff"><%=JSON.stringify(view.pilots[i].age)%></td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+            <% } %>
         </div>
       </form>
     </div>
