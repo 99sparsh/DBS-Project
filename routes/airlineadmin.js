@@ -130,18 +130,13 @@ exports.addSchedule = async (req, res) => {
     )
   );
   if (err) return res.sendError(err);
-  console.log({
+  var resources = {
     airplanes: airplanes,
     pilots: pilots,
     buses: buses,
     gates: gates
-  });
-  return res.render("schedule", {
-    airplanes: airplanes,
-    pilots: pilots,
-    buses: buses,
-    gates: gates
-  });
+  };
+  return res.render("schedule", resources);
 };
 
 exports.scheduleHangar = async (req, res) => {
@@ -153,7 +148,7 @@ exports.scheduleHangar = async (req, res) => {
     ])
   );
   if (err) return res.sendError(err);
-  else return res.sendSuccess("Inserted");
+  else return res.sendSuccess(result[0].Message);
 };
 
 exports.showDetails = async (req, res) => {
