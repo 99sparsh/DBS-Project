@@ -33,7 +33,7 @@ exports.deleteFlights = async (req, res) => {
 exports.showSchedule = async (req, res) => {
   [err, schedule] = await to(db.query(`select * from schedule`));
   if (err) return res.sendError(err);
-  [err, today] = await to(db.query(`select scheduledFlights() from schedule`));
+  [err, today] = await to(db.query(`select scheduledFlights() as Count;`));
   if (err) return res.sendError(err);
   var data = {
     schedule: schedule,

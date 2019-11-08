@@ -23,57 +23,57 @@
     <div class="login-dark">
         <div class="table-responsive">
           <% if(access == 1){ %>
-            <caption><h3 style="color:#ffffff">Pilots</h3></caption>
+            <caption><h3 style="color:#ffa500">Pilots</h3></caption>
             <table class="table" border="5" width="40" cellspacing=10 >
               <thead>
                 <tr>
-                  <th style="color:#ffffff">Name</th>
-                  <th style="color:#ffffff">Age</th>
+                  <th style="color:#ffa500">Name</th>
+                  <th style="color:#ffa500">Age</th>
                 </tr>
               </thead>
               <tbody>
                 <%for(var i=0;i < view.pilots.length; i++){%>
                 <tr>
-                  <td style="color:#ffffff"><%=JSON.stringify(view.pilots[i].name)%></td>
-                  <td style="color:#ffffff"><%=JSON.stringify(view.pilots[i].age)%></td>
+                  <td style="color:#ffa500"><%=JSON.stringify(view.pilots[i].name)%></td>
+                  <td style="color:#ffa500"><%=JSON.stringify(view.pilots[i].age)%></td>
                 </tr>
                 <% } %>
               </tbody>
             </table>
             <br>
-            <caption><h3 style="color:#ffffff">Crew</h3></caption>
+            <caption><h3 style="color:#ffa500">Crew</h3></caption>
             <table class="table" border="5" width="40" cellspacing=10 >
               <thead>
                 <tr>
-                  <th style="color:#ffffff">Name</th>
-                  <th style="color:#ffffff">Age</th>
+                  <th style="color:#ffa500">Name</th>
+                  <th style="color:#ffa500">Age</th>
                 </tr>
               </thead>
               <tbody>
                 <%for(var i=0;i < view.crew.length; i++){%>
                 <tr>
-                  <td style="color:#ffffff"><%=JSON.stringify(view.crew[i].name)%></td>
-                  <td style="color:#ffffff"><%=JSON.stringify(view.crew[i].age)%></td>
+                  <td style="color:#ffa500"><%=JSON.stringify(view.crew[i].name)%></td>
+                  <td style="color:#ffa500"><%=JSON.stringify(view.crew[i].age)%></td>
                 </tr>
                 <% } %>
               </tbody>
             </table>
             <br>
-            <caption><h3 style="color:#ffffff">Ground Staff</h3></caption>
+            <caption><h3 style="color:#ffa500">Ground Staff</h3></caption>
             <table class="table" border="5" width="40" cellspacing=10 >
               <thead>
                 <tr>
-                  <th style="color:#ffffff">Name</th>
-                  <th style="color:#ffffff">Age</th>
-                  <th style="color:#ffffff">Work</th>
+                  <th style="color:#ffa500">Name</th>
+                  <th style="color:#ffa500">Age</th>
+                  <th style="color:#ffa500">Work</th>
                 </tr>
               </thead>
               <tbody>
                 <%for(var i=0;i < view.staff.length; i++){%>
                 <tr>
-                  <td style="color:#ffffff"><%=JSON.stringify(view.staff[i].name)%></td>
-                  <td style="color:#ffffff"><%=JSON.stringify(view.staff[i].age)%></td>
-                  <td style="color:#ffffff"><%=JSON.stringify(view.staff[i].work)%></td>
+                  <td style="color:#ffa500"><%=JSON.stringify(view.staff[i].name)%></td>
+                  <td style="color:#ffa500"><%=JSON.stringify(view.staff[i].age)%></td>
+                  <td style="color:#ffa500"><%=JSON.stringify(view.staff[i].work)%></td>
                 </tr>
                 <% } %>
               </tbody>
