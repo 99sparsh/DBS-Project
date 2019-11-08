@@ -43,12 +43,14 @@ exports.cancelBooking = async (req, res) => {
 
 exports.showScheduleToBook = async (req, res) => {
   [err, result] = await to(
-    db.query(`select * from schedule_view where airline_id=?`, [
-      req.user.airline_id
-    ])
+    db.query(
+      `select * from schedule_view where airline=(select name from airlines where airline_id=?)`,
+      [req.user.airline_id]
+    )
   );
+  console.log(result);
   if (err) return res.sendError(err);
-  return res.sendSuccess(result, "Sent all flights");
+  return res.render("addbooking", result);
 };
 
 exports.addCabincrew = async (req, res) => {
@@ -176,7 +178,6 @@ exports.showDetails = async (req, res) => {
     crew: crew,
     staff: staff
   };
-  console.log(airportView);
   [err, pilots] = await to(
     db.query(
       `select pilot_view.name,age from pilot_view,airlines where pilot_view.airline=(select name from airlines where airline_id=?)`,
@@ -203,14 +204,11 @@ exports.showDetails = async (req, res) => {
     crew: crew,
     staff: staff
   };
-  console.log(airlineView);
   if (req.user.access == 1) {
     var data = { access: 1, view: airlineView };
-    console.log(data);
     return res.render("showdetails", data);
   } else {
     var data = { access: 2, view: airportView };
-    console.log(data);
     return res.render("showdetails", data);
   }
 };
