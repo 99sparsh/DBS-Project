@@ -34,9 +34,12 @@ exports.addschedule = async (req, res) => {
 exports.showdetails = async (req, res) => {
   res.render("showdetails");
 };
-exports.forgotpassword = async(req,res) => {
+exports.forgotpassword = async (req, res) => {
   res.render("forgotpassword");
 };
-exports.resetpassword = async(req,res) => {
+exports.resetpassword = async (req, res) => {
   res.render("resetpassword");
-}
+};
+exports.schedulehangar = async (req, res) => {
+  res.render("schedulehangar");
+};
