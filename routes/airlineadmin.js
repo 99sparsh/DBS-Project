@@ -64,7 +64,8 @@ exports.addCabincrew = async (req, res) => {
     ])
   );
   if (err) return res.sendError(err);
-  else return res.sendSuccess("Success");
+
+  return res.sendSuccess(null, "success");
 };
 
 exports.addPilot = async (req, res) => {
