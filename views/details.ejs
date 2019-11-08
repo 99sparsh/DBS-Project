@@ -11,41 +11,27 @@
 
   <body>
     <div class="login-dark">
-      <form method="post" style="height:458px;">
-        <h2 class="sr-only">Login Form</h2>
-        <div class="dropdown">
-          <button
-            class="btn btn-primary btn-lg dropdown-toggle"
-            data-toggle="dropdown"
-            aria-expanded="false"
-            type="button"
-          >
-            Select Employee Group
-          </button>
-          <div class="dropdown-menu dropdown-menu-left" role="menu">
-            <a class="dropdown-item" role="presentation" href="#">Pilots</a
-            ><a class="dropdown-item" role="presentation" href="#">Cabin Crew</a
-            ><a class="dropdown-item" role="presentation" href="#"
-              >Ground Staffs</a
-            >
-          </div>
-        </div>
-        <button
-          class="btn btn-primary align-self-center"
-          type="button"
-          style="margin:26px 80px 0px;"
-        >
-          Show
-        </button>
         <div class="table-responsive" style="margin:26px 0px;">
+          <% if(data.access == 1){%>
           <table class="table">
             <thead>
               <tr>
-                <th>Column 1</th>
+                <th>name</th>
+                <th>age</th>
+                <th>airline</th>
               </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+              <%for(var i=0;i < data.view.pilots.length; i++){%>
+              <tr>
+                <td>data.view.pilots.name</td>
+                <td>data.view.pilots.age</td>
+                <td>data.view.pilots.airline</td>
+              </tr>
+              <%}%>
+            </tbody>
           </table>
+          <%}%>
         </div>
       </form>
     </div>
