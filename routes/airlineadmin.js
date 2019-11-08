@@ -206,9 +206,9 @@ exports.showDetails = async (req, res) => {
   };
   if (req.user.access == 1) {
     var DBdata = { access: 1, view: airlineView };
-    return res.render("showdetails", DBdata);
+    return res.render("details", { access: 1, view: airlineView });
   } else {
     var DBdata = { access: 2, view: airportView };
-    return res.render("showdetails", DBdata);
+    return res.render("details", DBdata);
   }
 };
