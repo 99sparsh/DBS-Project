@@ -2,16 +2,14 @@ const Joi = require("joi");
 
 exports.login = Joi.object({
   body: Joi.object({
-    username: Joi.string()
-    .required(),
+    username: Joi.string().required(),
     password: Joi.string().required()
   }).required()
 });
 
 exports.forgotPassword = Joi.object({
   body: Joi.object({
-    username: Joi.string()
-      .required()
+    username: Joi.string().required()
   }).required()
 });
 
@@ -23,5 +21,8 @@ exports.resetPassword = Joi.object({
     password2: Joi.string()
       .min(8)
       .required()
-  }).required()
+  }).required(),
+  query: Joi.object({
+    token: Joi.string().required()
+  })
 });

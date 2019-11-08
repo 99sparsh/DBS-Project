@@ -22,7 +22,7 @@ exports.login = async (req, res) => {
     req.logIn(user, err => {
       if (err) return res.sendError(err);
       if (user.access == 1) return res.redirect("/airlinehome");
-      if(user.access == 2) return res.redirect("/airporthome");
+      if (user.access == 2) return res.redirect("/airporthome");
     });
   } else return res.sendError(null, "Invalid email/password combination");
 };
@@ -64,14 +64,13 @@ exports.forgotpassword = async (req, res) => {
     subject: "AMS Password Reset",
     // text: 'Follow the link to reset your password ',
     html:
-      '<p>Click <a href="https://ams/resetpassword?token=' +
+      '<p>Click <a href="http://204.48.25.246:3000/resetpassword?token=' +
       newtoken +
       '">here</a> to reset your password</p>'
   };
-  console.log(mailOptions);
 
   transporter.sendMail(mailOptions, function(error, info) {
-    if (error) console.log(error);
+    if (error) return res.sendError(err);
     else return res.sendSuccess(info.response, "Email sent");
   });
 };
