@@ -101,6 +101,12 @@ router.post(
   checkAirline,
   airlineAdmin.addGroundstaff
 );
+router.post(
+  "/admin/schedulehangar",
+  authenticate,
+  access(1),
+  airlineAdmin.scheduleHangar
+);
 
 //airport admin routes
 router.post(

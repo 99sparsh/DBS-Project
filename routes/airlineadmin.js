@@ -208,7 +208,8 @@ exports.showDetails = async (req, res) => {
     crew: crew,
     staff: staff
   };
-  console.log(airlineView);
-  if (req.user.access == 1) return res.render("showdetails", airlineView);
-  else return res.render("showdetails", airportView);
+  var access = { access: req.user.access };
+  if (req.user.access == 1)
+    return res.render("showdetails", access, airlineView);
+  else return res.render("showdetails", access, airportView);
 };
