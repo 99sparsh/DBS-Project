@@ -12,7 +12,7 @@
   <body>
     <div class="login-dark">
         <div class="table-responsive" style="margin:26px 0px;">
-          <% if(data.access == 1){%>
+          <% if(DBdata.access == 1){%>
           <table class="table">
             <thead>
               <tr>
@@ -22,11 +22,11 @@
               </tr>
             </thead>
             <tbody>
-              <%for(var i=0;i < data.view.pilots.length; i++){%>
+              <%for(var i=0;i < DBdata.view.pilots.length; i++){%>
               <tr>
-                <td>data.view.pilots.name</td>
-                <td>data.view.pilots.age</td>
-                <td>data.view.pilots.airline</td>
+                <td>DBdata.view.pilots.name</td>
+                <td>DBdata.view.pilots.age</td>
+                <td>DBdata.view.pilots.airline</td>
               </tr>
               <%}%>
             </tbody>
