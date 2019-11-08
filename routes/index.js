@@ -129,6 +129,8 @@ router.post(
   access(1),
   airlineAdmin.addSchedule
 );
+router.get("/viewdetails", authenticate, airlineAdmin.showDetails);
+
 //frontend routes
 router.get("/airlinehome", authenticate, access(1), frontend.airlinehome);
 router.get("/makebooking", authenticate, access(1), frontend.addbooking);

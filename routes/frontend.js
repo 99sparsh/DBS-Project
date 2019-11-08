@@ -32,7 +32,7 @@ exports.addschedule = async (req, res) => {
   res.render("scheduleflight");
 };
 exports.showdetails = async (req, res) => {
-  res.render("showdetails");
+  res.render("details");
 };
 exports.forgotpassword = async (req, res) => {
   res.render("forgotpassword");

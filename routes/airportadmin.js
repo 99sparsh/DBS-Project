@@ -24,3 +24,9 @@ exports.addSecurity = async (req, res) => {
     ])
   );
 };
+
+// exports.deleteFlights = asyn(req,res) =>{
+//   [err,result] = await to(
+//     db.query(`call `)
+//   )
+// }

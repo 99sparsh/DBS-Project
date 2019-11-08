@@ -154,7 +154,7 @@ exports.scheduleHangar = async (req, res) => {
 exports.showDetails = async (req, res) => {
   [err, pilots] = await to(
     db.query(
-      `select pilot_id,pilot.name,age,salary,airlines.name from pilot,airlines where pilot.airline_id=airline.airline_id`
+      `select pilot_id,pilot.name,age,salary,airlines.name from pilot,airlines where pilot.airline_id=airlines.airline_id`
     )
   );
   if (err) return res.sendError(err);
@@ -179,21 +179,21 @@ exports.showDetails = async (req, res) => {
   console.log(airportView);
   [err, pilots] = await to(
     db.query(
-      `select name,age from pilot_view,airlines where pilot_view.airline=(select name from airlines where airline_id=?)`,
+      `select pilot_view.name,age from pilot_view,airlines where pilot_view.airline=(select name from airlines where airline_id=?)`,
       [req.user.airline_id]
     )
   );
   if (err) return res.sendError(err);
   [err, crew] = await to(
     db.query(
-      `select name,age from crew_view,airlines where crew_view.airline=(select name from airlines where airline_id=?)`,
+      `select crew_view.name,age from crew_view,airlines where crew_view.airline=(select name from airlines where airline_id=?)`,
       [req.user.airline_id]
     )
   );
   if (err) return res.sendError(err);
   [err, staff] = await to(
     db.query(
-      `select name,age,work from staff_view,airlines where staff_view.airline=(select name from airlines where airline_id=?)`,
+      `select staff_view.name,age,work from staff_view,airlines where staff_view.airline=(select name from airlines where airline_id=?)`,
       [req.user.airline_id]
     )
   );
@@ -203,8 +203,14 @@ exports.showDetails = async (req, res) => {
     crew: crew,
     staff: staff
   };
-  var access = { access: req.user.access };
-  if (req.user.access == 1)
-    return res.render("showdetails", access, airlineView);
-  else return res.render("showdetails", access, airportView);
+  console.log(airlineView);
+  if (req.user.access == 1) {
+    var data = { access: 1, view: airlineView };
+    console.log(data);
+    return res.render("showdetails", data);
+  } else {
+    var data = { access: 2, view: airportView };
+    console.log(data);
+    return res.render("showdetails", data);
+  }
 };
