@@ -223,3 +223,20 @@ exports.showDetails = async (req, res) => {
     return res.render("details", { access: 2, view: airportView });
   }
 };
+
+exports.schedule = async (req, res) => {
+  [err, result] = await to(
+    db.query(`call schedule_flight(?,?,?,?,?,?,?)`, [
+      req.user.airline_id,
+      req.body.airplane,
+      req.body.bus,
+      req.body.pilot,
+      req.body.dest,
+      req.body.date,
+      req.body.gate
+    ])
+  );
+  if (err) return res.sendError(err);
+  console.log(result);
+  return res.sendSuccess(null, result);
+};

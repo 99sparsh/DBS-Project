@@ -122,12 +122,7 @@ router.post(
   access(2),
   apadmin.addSecurity
 );
-router.post(
-  "/admin/addschedule",
-  authenticate,
-  access(1),
-  airlineAdmin.addSchedule
-);
+router.post("/addschedule", authenticate, access(1), airlineAdmin.addSchedule);
 router.get("/viewstaffdetails", authenticate, airlineAdmin.showDetails);
 
 router.get("/apadmin/delete", authenticate, access(2), apadmin.deleteFlights);
@@ -158,4 +153,7 @@ router.get("/forgotpassword", frontend.forgotpassword);
 router.get("/resetpassword", frontend.resetpassword);
 router.get("/schedulehangar", authenticate, access(1), frontend.schedulehangar);
 router.get("/adminschedule", authenticate, access(2), apadmin.showSchedule);
+
+router.post("/schedule", authenticate, access(1), airlineAdmin.addSchedule);
+router.post("/admin/schedule", authenticate, access(1), airlineAdmin.schedule);
 module.exports = router;
