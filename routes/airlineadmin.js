@@ -14,31 +14,32 @@ exports.addBooking = async (req, res) => {
   if (result[0].airline_id != req.user.airline_id)
     return res.sendError("Unauthorized Access!");
   [err, result] = await to(
-    db.query(`call ticket_booking(?,'?',?,?)`, [
+    db.query(`call ticket_booking(?,?,?,?)`, [
       req.body.flight_id,
       req.body.name,
       req.body.age,
       req.body.phone
     ])
   );
+  console.log(result[0][0].Message);
   if (err) return res.sendError(err);
-  return res.sendSuccess(result[0].Message);
+  return res.sendSuccess(null, result[0][0]);
 };
 
 exports.cancelBooking = async (req, res) => {
-  [err, result] = await to(
-    db.query(`select airline_id from schedule where flight_id=?`, [
-      req.body.flight_id
-    ])
-  );
-  if (err) return res.sendError(err);
-  if (result[0].airline_id != req.user.airline_id)
-    return res.sendError("Unauthorized Access!");
+  // [err, result] = await to(
+  //   db.query(`select airline_id from schedule where flight_id=?`, [
+  //     req.body.flight_id
+  //   ])
+  // );
+  // if (err) return res.sendError(err);
+  // if (result[0].airline_id != req.user.airline_id)
+  //   return res.sendError("Unauthorized Access!");
   [err, result] = await to(
     db.query(`call delete_booking(?)`, [req.body.booking_id])
   );
   if (err) return res.sendError(err);
-  return res.sendSuccess(result[0].Message);
+  return res.sendSuccess(null, result[0][0]);
 };
 
 exports.showScheduleToBook = async (req, res) => {
@@ -86,7 +87,7 @@ exports.addGroundstaff = async (req, res) => {
   [err, result] = await to(
     db.query(`insert into groundStaff values(?,?,?,?,?,?)`, [
       req.body.staff_id,
-      req.body.airline_id,
+      req.user.airline_id,
       req.body.name,
       req.body.work,
       req.body.age,

@@ -12,8 +12,10 @@
   <body>
     <div class="login-dark">
       <div class="table-responsive">
-        <br>
-        <caption><center><h3 style="color:#ffffff">Schedule</h3></center></caption>
+        <br />
+        <caption>
+          <center><h3 style="color:#ffffff">Schedule</h3></center>
+        </caption>
         <table class="table" border="5">
           <thead>
             <tr>
@@ -26,13 +28,21 @@
           </thead>
           <tbody>
             <%for(var i=0;i < result.length; i++){%>
-                <tr>
-                  <td style="color:#ffffff"><%=JSON.stringify(result[i].flight_id)%></td>
-                  <td style="color:#ffffff"><%=JSON.stringify(result[i].airline)%></td>
-                  <td style="color:#ffffff"><%=JSON.stringify(result[i].destination)%></td>
-                  <td style="color:#ffffff"><%=JSON.stringify(result[i].availibility)%></td>
-                  <td style="color:#ffffff"><%=JSON.stringify(result[i].fare)%></td>
-                </tr>
+            <tr>
+              <td style="color:#ffffff">
+                <%=JSON.stringify(result[i].flight_id)%>
+              </td>
+              <td style="color:#ffffff">
+                <%=JSON.stringify(result[i].airline)%>
+              </td>
+              <td style="color:#ffffff">
+                <%=JSON.stringify(result[i].destination)%>
+              </td>
+              <td style="color:#ffffff">
+                <%=JSON.stringify(result[i].availibility)%>
+              </td>
+              <td style="color:#ffffff"><%=JSON.stringify(result[i].fare)%></td>
+            </tr>
             <%}%>
           </tbody>
         </table>
@@ -41,6 +51,7 @@
         method="post"
         action="/admin/addbooking"
         style="margin:0px;padding:48px;height:427px;"
+        id="form"
       >
         <h1 class="text-center text-primary">Booking</h1>
         <input
@@ -74,5 +85,7 @@
     </div>
     <script src="js/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="js/booking.js"></script>
   </body>
 </html>

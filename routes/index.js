@@ -59,7 +59,6 @@ router.post(
   "/admin/addbooking",
   authenticate,
   access(1),
-  validator(airlineAdminSchema.addBooking),
   airlineAdmin.addBooking
 );
 
