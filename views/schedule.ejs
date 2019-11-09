@@ -11,34 +11,39 @@
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
-    <div></div>
     <div class="login-dark">
       <form method="post" action="/admin/addschedule">
         <h2 class="text-center text-primary">Schedule Flight</h2>
         <div class="illustration">
           <i class="icon ion-plane" style="background-size:contain;"></i>
         </div>
-        <input
-          class="form-control form-control-lg"
-          type="text"
-          placeholder="Destination"
-          name="destination"
-        />
-        <input
-          class="form-control form-control-lg"
-          type="datetime-local"
-          placeholder="Date and Time"
-          name="date"
-        />
-
-        <button class="btn btn-primary btn-block">
-          <a style="color:white;">
-            Check availability
-          </a>
-        </button>
+        <select>
+          <%for(var i=0;i< airplanes.length;i++){%>
+            <option value="<%=JSON.stringify(airplanes[i].airplane_id)%>"><%=JSON.stringify(airplanes[i].airplane_id)%></option>
+            <%}%>
+        </select>
+        <br>
+        <select>
+          <%for(var i=0;i< pilots.length;i++){%>
+            <option value="<%=JSON.stringify(pilots[i].pilot_id)%>"><%=JSON.stringify(pilots[i].pilot_id)%></option>
+            <%}%>
+        </select>
+        <br>
+        <select>
+          <%for(var i=0;i< buses.length;i++){%>
+            <option value="<%=JSON.stringify(buses[i].bus_id)%>"><%=JSON.stringify(buses[i].bus_id)%></option>
+            <%}%>
+        </select>
       </form>
     </div>
     <script src="js/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
   </body>
 </html>
+
+<%= JSON.stringify(airplanes)%>
+<%= JSON.stringify(pilots)%>
+<%= JSON.stringify(buses)%>
+<%= JSON.stringify(gates)%>
+<%= JSON.stringify(date)%>
+<%= JSON.stringify(dest)%>
