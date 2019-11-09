@@ -130,7 +130,7 @@ router.post(
 );
 router.get("/viewstaffdetails", authenticate, airlineAdmin.showDetails);
 
-router.post("/apadmin/delete", authenticate, access(2), apadmin.deleteFlights);
+router.get("/apadmin/delete", authenticate, access(2), apadmin.deleteFlights);
 
 //frontend routes
 router.get("/airlinehome", authenticate, access(1), frontend.airlinehome);
