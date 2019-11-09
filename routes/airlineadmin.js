@@ -163,7 +163,7 @@ exports.scheduleHangar = async (req, res) => {
     ])
   );
   if (err) return res.sendError(err);
-  else return res.sendSuccess(result[0][0].Message);
+  else return res.sendSuccess(null, result[0][0]);
 };
 
 exports.showDetails = async (req, res) => {
