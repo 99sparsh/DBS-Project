@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Schedule Flight</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="fonts/ionicons.min.css" />
+    <link rel="stylesheet" href="css/Login-Form-Dark.css" />
+    <link rel="stylesheet" href="css/Navigation-with-Button.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="login-dark">
+      <form method="post" action="/admin/addschedule">
+        <h2 class="text-center text-primary">Schedule Flight</h2>
+        <div class="illustration">
+          <i class="icon ion-plane" style="background-size:contain;"></i>
+        </div>
+        <label>Airplanes</label>
+        <select>
+          <%for(var i=0;i< airplanes.length;i++){%>
+            <option value="<%=JSON.stringify(airplanes[i].airplane_id)%>"><%=JSON.stringify(airplanes[i].airplane_id)%></option>
+            <%}%>
+        </select>
+        <br>
+        <label>Pilots</label>
+        <select>
+          <%for(var i=0;i< pilots.length;i++){%>
+            <option value="<%=JSON.stringify(pilots[i].pilot_id)%>"><%=JSON.stringify(pilots[i].pilot_id)%></option>
+            <%}%>
+        </select>
+        <br>
+        <label>Bus</label>
+        <select>
+          <%for(var i=0;i< buses.length;i++){%>
+            <option value="<%=JSON.stringify(buses[i].bus_id)%>"><%=JSON.stringify(buses[i].bus_id)%></option>
+            <%}%>
+        </select>
+        <br>
+        <label>Boarding Gates</label>
+        <select>
+          <%for(var i=0;i< gates.length;i++){%>
+            <option value="<%=JSON.stringify(gates[i].id)%>"><%=JSON.stringify(gates[i].id)%></option>
+            <%}%>
+        </select>
+        <br>
+        <input type="datetime-local" value="<%=date%>">
+        <br>
+        <input type="datetime-local" value="<%=dest%>">
+        <button class="btn btn-primary btn-block">
+          <a style="color:white;">
+            Schedule
+          </a>
+        </button>
+      </form>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>

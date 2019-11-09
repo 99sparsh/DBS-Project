@@ -131,8 +131,8 @@ exports.addSchedule = async (req, res) => {
   if (err) return res.sendError(err);
   [err, buses] = await to(
     db.query(
-      `select bus_id from buses where bus_id not in (select bus_id from schedule where ? > date_add(departure,INTERVAL -2 HOUR) and ? < date_add(departure,INTERVAL 2 HOUR) and airline_id=?)`,
-      [req.body.date, req.body.date, req.user.airline_id]
+      `select bus_id from buses where bus_id not in (select bus_id from schedule where ? between date_add(departure,INTERVAL -2 HOUR) and date_add(departure,INTERVAL 2 HOUR) and airline_id=?)`,
+      [req.body.date, req.user.airline_id]
     )
   );
   if (err) return res.sendError(err);
@@ -147,7 +147,9 @@ exports.addSchedule = async (req, res) => {
     airplanes: airplanes,
     pilots: pilots,
     buses: buses,
-    gates: gates
+    gates: gates,
+    date: req.body.date,
+    dest: req.body.destination
   };
   return res.render("schedule", resources);
 };
