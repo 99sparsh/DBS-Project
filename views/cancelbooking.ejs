@@ -11,6 +11,33 @@
 
   <body>
     <div class="login-dark">
+      <div class="table-responsive">
+        <caption><center><h3 style="color:#ffffff">Bookings</h3></center></caption>
+        <table class="table" border="5">
+          <thead>
+            <tr>
+              <th style="color:#ffffff">Booking Id</th>
+              <th style="color:#ffffff">Flight Id</th>
+              <th style="color:#ffffff">Name</th>
+              <th style="color:#ffffff">Age</th>
+              <th style="color:#ffffff">Cost</th>
+              <th style="color:#ffffff">Phone</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%for(var i=0; i< bookings.length;i++){%>
+              <tr>
+                <td style="color:#ffffff"><%=bookings[i].booking_id%></td>
+                <td style="color:#ffffff"><%=bookings[i].flight_id%></td>
+                <td style="color:#ffffff"><%=bookings[i].name%></td>
+                <td style="color:#ffffff"><%=bookings[i].age%></td>
+                <td style="color:#ffffff"><%=bookings[i].cost%></td>
+                <td style="color:#ffffff"><%=bookings[i].phone%></td>
+              </tr>
+              <%}%>
+          </tbody>
+        </table>
+      </div>
       <form
         method="post"
         action="admin/cancelbooking"
