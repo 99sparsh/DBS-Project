@@ -20,34 +20,42 @@
         <label>Airplanes</label>
         <select>
           <%for(var i=0;i< airplanes.length;i++){%>
-            <option value="<%=JSON.stringify(airplanes[i].airplane_id)%>"><%=JSON.stringify(airplanes[i].airplane_id)%></option>
-            <%}%>
+          <option value="<%=JSON.stringify(airplanes[i].airplane_id)%>"
+            ><%=JSON.stringify(airplanes[i].airplane_id)%></option
+          >
+          <%}%>
         </select>
-        <br>
+        <br />
         <label>Pilots</label>
         <select>
           <%for(var i=0;i< pilots.length;i++){%>
-            <option value="<%=JSON.stringify(pilots[i].pilot_id)%>"><%=JSON.stringify(pilots[i].pilot_id)%></option>
-            <%}%>
+          <option value="<%=JSON.stringify(pilots[i].pilot_id)%>"
+            ><%=JSON.stringify(pilots[i].pilot_id)%></option
+          >
+          <%}%>
         </select>
-        <br>
+        <br />
         <label>Bus</label>
         <select>
           <%for(var i=0;i< buses.length;i++){%>
-            <option value="<%=JSON.stringify(buses[i].bus_id)%>"><%=JSON.stringify(buses[i].bus_id)%></option>
-            <%}%>
+          <option value="<%=JSON.stringify(buses[i].bus_id)%>"
+            ><%=JSON.stringify(buses[i].bus_id)%></option
+          >
+          <%}%>
         </select>
-        <br>
+        <br />
         <label>Boarding Gates</label>
         <select>
           <%for(var i=0;i< gates.length;i++){%>
-            <option value="<%=JSON.stringify(gates[i].id)%>"><%=JSON.stringify(gates[i].id)%></option>
-            <%}%>
+          <option value="<%=JSON.stringify(gates[i].id)%>"
+            ><%=JSON.stringify(gates[i].id)%></option
+          >
+          <%}%>
         </select>
-        <br>
-        <input type="datetime-local" value="<%=date%>">
-        <br>
-        <input type="datetime-local" value="<%=dest%>">
+        <br />
+        <input type="datetime-local" value="<%=date%>" />
+        <br />
+        <input type="datetime-local" value="<%=dest%>" />
         <button class="btn btn-primary btn-block">
           <a style="color:white;">
             Schedule
