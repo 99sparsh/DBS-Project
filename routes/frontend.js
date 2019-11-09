@@ -4,9 +4,6 @@ exports.airlinehome = async (req, res) => {
 exports.index = async (req, res) => {
   res.render("index");
 };
-// exports.addbooking = async (req, res) => {
-//   res.render("addbooking");
-// };
 exports.addcabincrew = async (req, res) => {
   res.render("addcabincrew");
 };
@@ -24,9 +21,6 @@ exports.addsecurity = async (req, res) => {
 };
 exports.airporthome = async (req, res) => {
   res.render("airporthome");
-};
-exports.cancelbooking = async (req, res) => {
-  res.render("cancelbooking");
 };
 exports.addschedule = async (req, res) => {
   res.render("scheduleflight");

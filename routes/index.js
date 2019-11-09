@@ -146,7 +146,12 @@ router.get("/addpilot", authenticate, access(1), frontend.addpilot);
 router.get("/addairline", authenticate, access(2), frontend.addairline);
 router.get("/addsecurity", authenticate, access(2), frontend.addsecurity);
 router.get("/airporthome", authenticate, access(2), frontend.airporthome);
-router.get("/cancelbooking", authenticate, access(1), frontend.cancelbooking);
+router.get(
+  "/cancelbooking",
+  authenticate,
+  access(1),
+  airlineAdmin.getCancelBooking
+);
 router.get("/scheduleflight", authenticate, access(1), frontend.addschedule);
 //router.get("/viewstaffdetails", authenticate, access(1), frontend.showdetails);
 router.get("/forgotpassword", frontend.forgotpassword);

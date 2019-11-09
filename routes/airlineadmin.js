@@ -41,7 +41,16 @@ exports.cancelBooking = async (req, res) => {
   if (err) return res.sendError(err);
   return res.sendSuccess(null, result[0][0]);
 };
-
+exports.getCancelBooking = async (req, res) => {
+  [err, bookings] = await to(
+    db.query(
+      `select * from booking where flight_id in (select flight_id from schedule where airline_id=?)`,
+      [req.user.airline_id]
+    )
+  );
+  if (err) return res.sendError(err);
+  res.render("cancelbooking", bookings);
+};
 exports.showScheduleToBook = async (req, res) => {
   [err, result] = await to(
     db.query(
@@ -152,7 +161,7 @@ exports.scheduleHangar = async (req, res) => {
     ])
   );
   if (err) return res.sendError(err);
-  else return res.sendSuccess(result[0].Message);
+  else return res.sendSuccess(result[0][0].Message);
 };
 
 exports.showDetails = async (req, res) => {
