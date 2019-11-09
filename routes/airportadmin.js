@@ -23,11 +23,14 @@ exports.addSecurity = async (req, res) => {
       req.body.post
     ])
   );
+  if (err) return res.sendError(err);
+  return res.sendSuccess("Security Added");
 };
 
 exports.deleteFlights = async (req, res) => {
   [err, result] = await to(db.query(`call remove_flights()`));
   if (err) return res.sendError(err);
+  return res.sendSuccess(null, "done");
 };
 
 exports.showSchedule = async (req, res) => {
