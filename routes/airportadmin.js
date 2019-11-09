@@ -23,6 +23,8 @@ exports.addSecurity = async (req, res) => {
       req.body.post
     ])
   );
+  if (err) return res.sendError(err);
+  return res.sendSuccess("Security Added");
 };
 
 exports.deleteFlights = async (req, res) => {

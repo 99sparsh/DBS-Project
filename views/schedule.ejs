@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
-    <div class="login-dark">
+    <div class="login-dark" style='background-image:url("img/terminal-1210006_1280.jpg");background-size:cover;background-position:center;'>
       <form method="post" action="/admin/addschedule">
         <h2 class="text-center text-primary">Schedule Flight</h2>
         <div class="illustration">
@@ -53,9 +53,10 @@
           <%}%>
         </select>
         <br />
-        <input type="datetime-local" value="<%=date%>" />
+        <input type="datetime-local" value="<%=date%>" 
+        name=date/>
         <br />
-        <input type="datetime-local" value="<%=dest%>" />
+        <input type="text" value="<%=dest%>" name=dest/>
         <button class="btn btn-primary btn-block">
           <a style="color:white;">
             Schedule
