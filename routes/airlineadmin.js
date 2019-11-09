@@ -14,7 +14,7 @@ exports.addBooking = async (req, res) => {
   if (result[0].airline_id != req.user.airline_id)
     return res.sendError("Unauthorized Access!");
   [err, result] = await to(
-    db.query(`call ticket_booking(?,?,?,?)`, [
+    db.query(`call ticket_booking(?,'?',?,?)`, [
       req.body.flight_id,
       req.body.name,
       req.body.age,
@@ -43,12 +43,14 @@ exports.cancelBooking = async (req, res) => {
 
 exports.showScheduleToBook = async (req, res) => {
   [err, result] = await to(
-    db.query(`select * from schedule_view where airline_id=?`, [
-      req.user.airline_id
-    ])
+    db.query(
+      `select * from schedule_view where airline=(select name from airlines where airline_id=?)`,
+      [req.user.airline_id]
+    )
   );
+  console.log(result);
   if (err) return res.sendError(err);
-  return res.sendSuccess(result, "Sent all flights");
+  return res.render("addbooking", result);
 };
 
 exports.addCabincrew = async (req, res) => {
@@ -62,7 +64,8 @@ exports.addCabincrew = async (req, res) => {
     ])
   );
   if (err) return res.sendError(err);
-  else return res.sendSuccess("Success");
+
+  return res.sendSuccess(null, "success");
 };
 
 exports.addPilot = async (req, res) => {
@@ -130,18 +133,13 @@ exports.addSchedule = async (req, res) => {
     )
   );
   if (err) return res.sendError(err);
-  console.log({
+  var resources = {
     airplanes: airplanes,
     pilots: pilots,
     buses: buses,
     gates: gates
-  });
-  return res.render("schedule", {
-    airplanes: airplanes,
-    pilots: pilots,
-    buses: buses,
-    gates: gates
-  });
+  };
+  return res.render("schedule", resources);
 };
 
 exports.scheduleHangar = async (req, res) => {
@@ -153,25 +151,25 @@ exports.scheduleHangar = async (req, res) => {
     ])
   );
   if (err) return res.sendError(err);
-  else return res.sendSuccess("Inserted");
+  else return res.sendSuccess(result[0].Message);
 };
 
 exports.showDetails = async (req, res) => {
   [err, pilots] = await to(
     db.query(
-      `select pilot_id,pilot.name,age,salary,airlines.name from pilot,airlines where pilot.airline_id=airline.airline_id`
+      `select pilot_id,pilot.name,age,salary,airlines.name as airline from pilot,airlines where pilot.airline_id=airlines.airline_id`
     )
   );
   if (err) return res.sendError(err);
   [err, crew] = await to(
     db.query(
-      `select crew_id,cabincrew.name,age,salary,airlines.name from cabincrew,airlines where cabincrew.airline_id=airlines.airline_id`
+      `select crew_id,cabincrew.name,age,salary,airlines.name as airline from cabincrew,airlines where cabincrew.airline_id=airlines.airline_id`
     )
   );
   if (err) return res.sendError(err);
   [err, staff] = await to(
     db.query(
-      `select staff_id,groundStaff.name,work,age,salary,airlines.name from groundStaff,airlines where groundStaff.airline_id=airlines.airline_id`
+      `select staff_id,groundStaff.name,work,age,salary,airlines.name as airline from groundStaff,airlines where groundStaff.airline_id=airlines.airline_id`
     )
   );
 
@@ -181,24 +179,23 @@ exports.showDetails = async (req, res) => {
     crew: crew,
     staff: staff
   };
-  console.log(airportView);
   [err, pilots] = await to(
     db.query(
-      `select name,age from pilot_view,airlines where pilot_view.airline=(select name from airlines where airline_id=?)`,
+      `select pilot_view.name,age from pilot_view where pilot_view.airline=(select name from airlines where airline_id=?)`,
       [req.user.airline_id]
     )
   );
   if (err) return res.sendError(err);
   [err, crew] = await to(
     db.query(
-      `select name,age from crew_view,airlines where crew_view.airline=(select name from airlines where airline_id=?)`,
+      `select crew_view.name,age from crew_view where crew_view.airline=(select name from airlines where airline_id=?)`,
       [req.user.airline_id]
     )
   );
   if (err) return res.sendError(err);
   [err, staff] = await to(
     db.query(
-      `select name,age,work from staff_view,airlines where staff_view.airline=(select name from airlines where airline_id=?)`,
+      `select staff_view.name,age,work from staff_view where staff_view.airline=(select name from airlines where airline_id=?)`,
       [req.user.airline_id]
     )
   );
@@ -208,8 +205,9 @@ exports.showDetails = async (req, res) => {
     crew: crew,
     staff: staff
   };
-  var access = { access: req.user.access };
-  if (req.user.access == 1)
-    return res.render("showdetails", access, airlineView);
-  else return res.render("showdetails", access, airportView);
+  if (req.user.access == 1) {
+    return res.render("details", { access: 1, view: airlineView });
+  } else {
+    return res.render("details", { access: 2, view: airportView });
+  }
 };

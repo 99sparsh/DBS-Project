@@ -24,3 +24,19 @@ exports.addSecurity = async (req, res) => {
     ])
   );
 };
+
+exports.deleteFlights = async (req, res) => {
+  [err, result] = await to(db.query(`call remove_flights()`));
+  if (err) return res.sendError(err);
+};
+
+exports.showSchedule = async (req, res) => {
+  [err, schedule] = await to(db.query(`select * from schedule`));
+  if (err) return res.sendError(err);
+  [err, today] = await to(db.query(`select scheduledFlights() as Count;`));
+  if (err) return res.sendError(err);
+  return res.render("adminschedule", {
+    schedule: schedule,
+    today: today
+  });
+};

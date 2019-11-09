@@ -8,7 +8,7 @@ formEl.addEventListener("submit", function(event) {
     data[formEl[i].name] = formEl[i].value;
   }
   data = JSON.stringify(data);
-  var url = "/admin/addcabincrew/";
+  var url = "/admin/addpilot/";
   var fetchOptions = {
     method: "POST",
     headers: {

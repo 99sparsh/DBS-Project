@@ -11,6 +11,32 @@
 
   <body>
     <div class="login-dark">
+      <div class="table-responsive">
+        <br>
+        <caption><center><h3 style="color:#ffffff">Schedule</h3></center></caption>
+        <table class="table" border="5">
+          <thead>
+            <tr>
+              <th style="color:#ffffff">Id</th>
+              <th style="color:#ffffff">Airline</th>
+              <th style="color:#ffffff">Destination</th>
+              <th style="color:#ffffff">Availability</th>
+              <th style="color:#ffffff">Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%for(var i=0;i < result.length; i++){%>
+                <tr>
+                  <td style="color:#ffffff"><%=JSON.stringify(result[i].flight_id)%></td>
+                  <td style="color:#ffffff"><%=JSON.stringify(result[i].airline)%></td>
+                  <td style="color:#ffffff"><%=JSON.stringify(result[i].destination)%></td>
+                  <td style="color:#ffffff"><%=JSON.stringify(result[i].availibility)%></td>
+                  <td style="color:#ffffff"><%=JSON.stringify(result[i].fare)%></td>
+                </tr>
+            <%}%>
+          </tbody>
+        </table>
+      </div>
       <form
         method="post"
         action="/admin/addbooking"

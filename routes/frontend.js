@@ -4,9 +4,9 @@ exports.airlinehome = async (req, res) => {
 exports.index = async (req, res) => {
   res.render("index");
 };
-exports.addbooking = async (req, res) => {
-  res.render("addbooking");
-};
+// exports.addbooking = async (req, res) => {
+//   res.render("addbooking");
+// };
 exports.addcabincrew = async (req, res) => {
   res.render("addcabincrew");
 };
@@ -32,7 +32,7 @@ exports.addschedule = async (req, res) => {
   res.render("scheduleflight");
 };
 exports.showdetails = async (req, res) => {
-  res.render("showdetails");
+  res.render("details");
 };
 exports.forgotpassword = async (req, res) => {
   res.render("forgotpassword");

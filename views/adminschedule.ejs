@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Show Schedule</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/Login-Form-Dark.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="login-dark">
+      <div class="table-responsive">
+        <br><br>
+        <caption><center><h3 style="color:#ffffff">Schedule</h3></center>
+          <br>
+        <table class="table" border="5">
+          <thead>
+              <tr>
+                <th style="color:#ffffff">Id</th>
+                <th style="color:#ffffff">Airplane</th>
+                <th style="color:#ffffff">Airline</th>
+                <th style="color:#ffffff">Pilot</th>
+                <th style="color:#ffffff">Destination</th>
+                <th style="color:#ffffff">Departure</th>
+                <th style="color:#ffffff">Cost</th>
+                <th style="color:#ffffff">Capacity</th>
+                <th style="color:#ffffff">Bus</th>
+                <th style="color:#ffffff">Boarding Gate</th>
+              </tr>
+          </thead>
+          <tbody>
+            <%for(var i=0;i< schedule.length;i++){%>
+              <tr>
+                <td style="color:#ffffff"><%=JSON.stringify(schedule[i].flight_id)%></td>
+                <td style="color:#ffffff"><%=JSON.stringify(schedule[i].airplane_id)%></td>
+                <td style="color:#ffffff"><%=JSON.stringify(schedule[i].airline_id)%></td>
+                <td style="color:#ffffff"><%=JSON.stringify(schedule[i].pilot_id)%></td>
+                <td style="color:#ffffff"><%=JSON.stringify(schedule[i].destination)%></td>
+                <td style="color:#ffffff"><%=JSON.stringify(schedule[i].departure)%></td>
+                <td style="color:#ffffff"><%=JSON.stringify(schedule[i].base_fare)%></td>
+                <td style="color:#ffffff"><%=JSON.stringify(schedule[i].fill)%></td>
+                <td style="color:#ffffff"><%=JSON.stringify(schedule[i].bus_id)%></td>
+                <td style="color:#ffffff"><%=JSON.stringify(schedule[i].boarding_gate)%></td>
+              </tr>
+            <%}%>
+          </tbody>
+        </table>
+      </div>
+      <br><br>
+      <center><h4 style="color:#ffffff">Total flights scheduled for today <%=JSON.stringify(today[0].Count)%></h4></center>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>

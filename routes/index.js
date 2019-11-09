@@ -129,9 +129,18 @@ router.post(
   access(1),
   airlineAdmin.addSchedule
 );
+router.get("/viewstaffdetails", authenticate, airlineAdmin.showDetails);
+
+router.post("/apadmin/delete", authenticate, access(2), apadmin.deleteFlights);
+
 //frontend routes
 router.get("/airlinehome", authenticate, access(1), frontend.airlinehome);
-router.get("/makebooking", authenticate, access(1), frontend.addbooking);
+router.get(
+  "/makebooking",
+  authenticate,
+  access(1),
+  airlineAdmin.showScheduleToBook
+);
 router.get("/addcabincrew", authenticate, access(1), frontend.addcabincrew);
 router.get("/addgroundstaff", authenticate, access(1), frontend.addgroundstaff);
 router.get("/addpilot", authenticate, access(1), frontend.addpilot);
@@ -140,8 +149,9 @@ router.get("/addsecurity", authenticate, access(2), frontend.addsecurity);
 router.get("/airporthome", authenticate, access(2), frontend.airporthome);
 router.get("/cancelbooking", authenticate, access(1), frontend.cancelbooking);
 router.get("/scheduleflight", authenticate, access(1), frontend.addschedule);
-router.get("/showdetails", authenticate, access(1), frontend.showdetails);
+//router.get("/viewstaffdetails", authenticate, access(1), frontend.showdetails);
 router.get("/forgotpassword", frontend.forgotpassword);
 router.get("/resetpassword", frontend.resetpassword);
 router.get("/schedulehangar", authenticate, access(1), frontend.schedulehangar);
+router.get("/adminschedule", authenticate, access(2), apadmin.showSchedule);
 module.exports = router;
