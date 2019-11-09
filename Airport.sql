@@ -780,7 +780,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ticket_booking`(in fid int, in n varchar(7), in age int, in phone int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ticket_booking`(in fid int, in n varchar(15), in age int, in phone varchar(15))
 begin
 declare f int;
 declare c int;
